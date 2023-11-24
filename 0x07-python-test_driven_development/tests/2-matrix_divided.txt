@@ -1,0 +1,69 @@
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+Pass a list of list of ints/floats and a number to divide the ints/floats to the function and it returns a new matrix with the answers.
+===============================================================
+
+>>> print(matrix_divided([[0, 1], [2, 3], [4, 5]], 4))
+[[0.0, 0.25], [0.5, 0.75], [1.0, 1.25]]
+
+=====================================
+= Trying to divide ints/floats by 0 =
+=====================================
+
+>>> print(matrix_divided([[1, 2, 3], [4, 5, 6]], 0))
+Traceback (most recent call last):
+ZeroDivisionError: division by zero
+
+================================
+= Trying to divide by a string =
+================================
+
+>>> print(matrix_divided([[1, 2, 3], [4, 5, 6]], "egg"))
+Traceback (most recent call last):
+TypeError: div must be a number
+
+============================================
+= Lists in matrix are of different lengths =
+============================================
+
+>>> print(matrix_divided([[1, 2, 3], [4, 5]], 2))
+Traceback (most recent call last):
+TypeError: Each row of the matrix must have the same size
+
+================================================
+= Passing anything that is not a list of lists =
+================================================
+
+>>> print(matrix_divided("1024", 2))
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+===============================
+= Dividing matrix by infinity =
+===============================
+
+>>> print(matrix_divided([[12, 13], [14, 15]], float("inf")))
+[[0.0, 0.0], [0.0, 0.0]]
+
+
+========================
+= Missing one argument =
+========================
+
+>>> print(matrix_divided([[1, 2], [3, 4]]))
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+>>> print(matrix_divided(6))
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+
+=========================
+= Missing two arguments =
+=========================
+
+>>> print(matrix_divided())
+Traceback (most recent call last):
+TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
