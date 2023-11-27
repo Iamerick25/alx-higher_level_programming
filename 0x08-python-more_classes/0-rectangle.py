@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""A function that creates an empty class "Rectangle" that defines a rectangle"""
+"""A module for the rectangle class"""
 
-class Rectangle():
+class Rectangle:
     """Empty class to define rectangle"""
+
     pass
