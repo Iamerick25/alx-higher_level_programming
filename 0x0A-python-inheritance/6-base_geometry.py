@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-"""Module to implement class BaseGeometry"""
+""" Provides a (mostly empty) base class for geometric objects
+"""
+
 
 class BaseGeometry:
-    """BaseGeometry class"""
-
+    """ Implement a base class for geometric objects
+    """
     def area(self):
-        """Compute area of self"""
-        raise Exception('area() is not implemented')
+        """ Calculate the area of a geometric object
+        """
+        raise Exception("area() is not implemented")
