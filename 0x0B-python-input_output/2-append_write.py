@@ -2,8 +2,7 @@
 """Module to append text to a file"""
 
 def append_write(filename="", text=""):
-    """
-    appends a string at the end of a text file.
+    """appends a string at the end of a text file.
 
     Args:
     filename = the file name

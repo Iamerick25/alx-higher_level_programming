@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-"""Module writes a string to a text file"""
+"""Module to write text to a file"""
+
 
 def write_file(filename="", text=""):
-    """write to file
+    """Write `text` to `filename`
 
     Args:
-        filename: the filename
-        text: the text
+        filename (str): file to write to
+        text (str): text to write into `filename`
 
-    Returns:
-        return the number of byte written
+    Returns: number of characters written
     """
-    with open(filename, 'w', encoding='utf-8') as myfile:
-        return (myfile.write(text))
+    with open(filename, 'w', encoding='utf8') as f:
+        return f.write(text)
