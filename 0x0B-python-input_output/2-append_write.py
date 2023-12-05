@@ -2,15 +2,14 @@
 """Module to append text to a file"""
 
 def append_write(filename="", text=""):
-    """appends a string at the end of a text file.
+    """Appends a string at the end of a text file
 
     Args:
-    filename = the file name
-    text = the text to append
+    filename (str): file to write to
+    text (str): text to write in utf8 encoding
 
-    Returns:
-    the number of characters added
+    Returns: number of characters written
     """
 
     with open(filename, 'a', encoding='utf-8') as f:
-        return (f.write(text))
+        return f.write(text)
