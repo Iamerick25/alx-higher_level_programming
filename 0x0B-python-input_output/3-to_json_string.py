@@ -1,7 +1,15 @@
 #!/usr/bin/python3
-"""Module of JSON representation"""
+"""return JSON representation of an object (string)"""
 import json
 
+
 def to_json_string(my_obj):
-    """json function representing an object"""
+    """to json strinf
+
+    Args:
+        my_obj: the python data structure
+
+    Returns:
+        thr json object representation
+    """
     return (json.dumps(my_obj))
