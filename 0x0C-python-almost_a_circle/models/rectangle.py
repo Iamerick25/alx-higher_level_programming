@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Rectangle inherit from Base"""
-
 from models.base import Base
+
 
 class Rectangle(Base):
     """Rectangle an instance of Base"""

@@ -1,65 +1,66 @@
 #!/usr/bin/python3
-"""
-This class create a square
-"""
+"""The square model, let's write"""
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """
-    This is a class representaation of a square
-    """
+    """the square model"""
 
     def __init__(self, size, x=0, y=0, id=None):
-        """
-        Initialising Data
-        """
-        super().__init__(size, size, x, y, id)
-        self.size = size
+        """The constructor class for the square"""
+        super().__init__(width=size, height=size, x=x, y=y, id=id)
+
+    def __str__(self):
+        """update the print for square"""
+        value = "[Square] ({}) {}/{} - {}".format(self.id, self.x,
+                                                  self.y, self.width)
+        return (value)
 
     @property
     def size(self):
-        """
-        return size value
-        """
-        return self.width
+        """getter of size"""
+        return (self.width)
 
     @size.setter
-    def size(self, size):
-        """
-        update the size value
-        """
-        self.data_validator("width", size)
-        self.width = size
-        self.height = size
-
-    def data_validator(self, attribute, value):
-        if not isinstance(value, (int, float)):
-            raise ValueError(f"{attribute} must be a number")
-        if value <= 0:
-            raise ValueError(f"{attribute} must be greater than zero")
-
-    def __str__(self):
-        """
-        returns a string with the chars of the square
-        """
-        return ("[Square] ({}) {}/{} - {}".format(
-            self.id, self.x, self.y, self.size))
+    def size(self, value):
+        """set the size"""
+        self.width = value
+        self.height = value
 
     def update(self, *args, **kwargs):
-        """
-        updates attributes of the square
-        """
-        arg_list = ["id", "size", "x", "y", "\0"]
-        if (len(args)):
-            for i in range(len(args)):
-                setattr(self, arg_list[i], args[i])
-        else:
+        """update the attribute based on variable/keyword argument"""
+        if args and len(args) != 0:
+            a = 0
+            for arg in args:
+                if a == 0:
+                    if arg is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = arg
+                elif a == 1:
+                    self.size = arg
+                elif a == 2:
+                    self.x = arg
+                elif a == 3:
+                    self.y = arg
+                a += 1
+        elif kwargs and len(kwargs) != 0: 
             for k, v in kwargs.items():
-                setattr(self, k, v)
+                if k == "id":
+                    if v is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = v
+                elif k == "size":
+                    self.size = v
+                elif k == "x":
+                    self.x = v
+                elif k == "y":
+                    self.y = v
 
     def to_dictionary(self):
-        """
-        returns the dictionary representation of square
-        """
-        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
+        """return the dictionary representa... of attr..."""
+        return {'id': self.id,
+                'size': self.size,
+                'x': self.x,
+                'y': self.y}

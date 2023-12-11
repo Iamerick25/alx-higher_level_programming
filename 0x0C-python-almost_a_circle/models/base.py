@@ -8,12 +8,9 @@ class Base:
     """writing the base class of this model"""
 
     __nb_objects = 0
-    """Class variable representing the total count of Base (and subclass)
-    instances.
-    """
 
     def __init__(self, id=None):
-        """Initialize new Base instance
+        """constructor method
 
         Args:
             id : the id
@@ -24,69 +21,47 @@ class Base:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
 
-    @classmethod
-    def create(cls, **dictionary):
-        """Method to create new instance directly from the class. Mainly
-        for use by subclasses of Base.
-
-        Args:
-            dictionary (dict): Dictionary of attributes, value pairs
-                with which to set attributes for new instance.
-
-        Returns: New instance of class from which `create` was called.
-
-        Raises: Errors delegated to subclasses of Base which call this
-            method.
-        """
-        if cls.__name__ == "Rectangle":
-            c = cls(1, 1)
-        elif cls.__name__ == "Square":
-            c = cls(1)
-        else:
-            c = cls()
-        if not hasattr(dictionary, "keys") or not callable(dictionary.keys):
-            dictionary = {}
-        c.update(**dictionary)
-        return c
-
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Static method to serialize list of dictionary objects into json.
+        """list of dictionary to json string"""
+        if list_dictionaries is None or list_dictionaries == []:
+            return ("[]")
+        else:
+            return (json.dumps(list_dictionaries))
 
-        Args:
-            list_dictionaries (list of dicts): List of dictionaries
-                of attribute, value pairs for serialization into json
-                representation.
-
-        Returns: Json string representation of `list_dictionaries`.
-
-        Raises: Any errors encounterd during serialization.
-        """
-        if not list_dictionaries or len(list_dictionaries) == 0:
-            list_dictionaries = []
-        return json.dumps(list_dictionaries)
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """save the instance of the obj to file"""
+        filename = cls.__name__ + ".json"
+        with open(filename, "w") as myfile:
+            if (list_objs is None or list_objs == []):
+                myfile.write('[]')
+            else:
+                list_dict = [i.to_dictionary() for i in list_objs]
+                myfile.write(Base.to_json_string(list_dict))
 
     @staticmethod
     def from_json_string(json_string):
-        """Static method to deserialize json string into python objects.
-
-        Args:
-            json_string (str): String representation of objects.
-
-        Returns: Python objects represented by `json_string`.
-
-        Raises: Any errors encountered during serialization.
-        """
-        if json_string == "" or json_string is None:
+        """load list from json string"""
+        if json_string is None or json_string == "[]":
             return []
-        return json.loads(json_string)
+        else:
+            return (json.loads(json_string))
+
+    @classmethod
+    def create(cls, **dictionary):
+        """create the class method"""
+        if dictionary and dictionary != {}:
+            if cls.__name__ == "Rectangle":
+                new = cls(1, 1)
+            else:
+                new = cls(1)
+            new.update(**dictionary)
+            return (new)
 
     @classmethod
     def load_from_file(cls):
-        """Class method to load file containing json serialized objects.
-        Attempts to open the file 'class name.json' and deserialize
-        it. If it does not exist, returns empty list.
-        """
+        """load from file"""
         filename = str(cls.__name__) + ".json"
         try:
             with open(filename, "r") as myfile:
@@ -97,15 +72,7 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """Class method to convert `list_objs` to csv format and save
-        in file with name '<class name>.csv'.
-
-        Args:
-            list_objs (list): list of objects of class from which
-                this method is called.
-
-        Raises: Any error encounterd during conversion to csv.
-        """
+        """serialize from csv"""
         filename = cls.__name__ + ".csv"
         with open(filename, "w", newline="") as csvfile:
             if list_objs is None or list_objs == []:
@@ -121,10 +88,7 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """Class method to load file containing csv representation of objects.
-        Attempts to open the file 'class name.csv' and convert back to
-        original list of objects. If it does not exist, returns empty list.
-        """
+        """load from the csv file"""
         filename = cls.__name__ + ".csv"
         try:
             with open(filename, "r", newline="") as csvfile:
