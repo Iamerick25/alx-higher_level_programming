@@ -28,7 +28,7 @@ class TestRectangleInstance(unittest.TestCase):
 
     def test_y_private(self):
         with self.assertRaises(AttributeError):
-             print(Rectangle(1, 2, 3, 4).__y)
+            print(Rectangle(1, 2, 3, 4).__y)
 
     def test_y_get(self):
         r = Rectangle(5, 7, 7, 5, 1)
@@ -37,7 +37,7 @@ class TestRectangleInstance(unittest.TestCase):
     def test_y_setter_not_int(self):
         r = Rectangle(5, 7, 7, 5, 1)
         with self.assertRaises(TypeError):
-            r.y ="hello"
+            r.y = "hello"
 
     def test_y_setter_less(self):
         r = Rectangle(5, 7, 7, 5, 1)
@@ -91,9 +91,9 @@ class TestRectangle_stdout(unittest.TestCase):
         else:
             rec.display()
         sys.stdout = sys.__stdout__
-        return(capture)
+        return capture
 
-     ##test display
+    # test display
     def test_display_width(self):
         """test the display"""
         r = Rectangle(2, 3, 0, 0, 0)
@@ -140,19 +140,19 @@ class TestUpdate(unittest.TestCase):
 
     def test_update_with_kwargs(self):
         r3 = Rectangle(10, 10, 10, 10)
-        r3.update(id = 89)
+        r3.update(id=89)
         m = "[Rectangle] (89) 10/10 - 10/10"
         self.assertEqual(m, str(r3))
 
     def test_with_arg_kwargs(self):
         r4 = Rectangle(1, 2, 3, 4, 5)
-        r4.update(5, 4, 3, 2, 1, id = 90, width = 48)
+        r4.update(5, 4, 3, 2, 1, id=90, width=48)
         m = "[Rectangle] (5) 2/1 - 4/3"
         self.assertEqual(m, str(r4))
 
     def test_kwargs_only(self):
         r5 = Rectangle(1, 2, 3, 4, 5)
-        r5.update(width = 49, height = 40, x = 2, y = 3, id = 7)
+        r5.update(width=49, height=40, x=2, y=3, id=7)
         self.assertEqual(r5.area(), 1960)
 
 
@@ -166,14 +166,15 @@ class TestToDictionary(unittest.TestCase):
         self.assertEqual(s1.to_dictionary(), p)
 
     def test_to_dict_with_edit(self):
-         s1 = Rectangle(2, 4, 5, 6, 7)
-         s1.update(6, 5, 4, 5, 6)
-         p = {'id': 6, 'width': 5, 'height': 4, 'x': 5, 'y': 6}
-         self.assertEqual(s1.to_dictionary(), p)
+        s1 = Rectangle(2, 4, 5, 6, 7)
+        s1.update(6, 5, 4, 5, 6)
+        p = {'id': 6, 'width': 5, 'height': 4, 'x': 5, 'y': 6}
+        self.assertEqual(s1.to_dictionary(), p)
 
 
 class TestToJson(unittest.TestCase):
-    """Test  for to json"""
+    """Test for to json"""
+
     def test_json_first_a(self):
         r1 = Rectangle(10, 7, 2, 8, 9)
         dictionary = r1.to_dictionary()
@@ -186,6 +187,7 @@ class TestToJson(unittest.TestCase):
         p = '[[]]'
         json_dictionary = Base.to_json_string([dictionary])
         self.assertEqual(json_dictionary, p)
+
 
 if __name__ == "__main__":
     unittest.main()
